@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { BsPersonCircle } from "react-icons/bs"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const AadharForm = () => {
@@ -344,6 +344,7 @@ const AadharForm = () => {
             </svg>
           ) : null}
         </button>
+        <Link to={'/card'} className='text-blue-700 hover:underline dark:text-blue-500 text-xl'>Already user exist</Link>
       </form>
 
     </div>

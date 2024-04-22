@@ -38,8 +38,16 @@ const AadharCard = () => {
     return date.toLocaleDateString('en-IN', options); // 'en-IN' for English with Indian date format
 };
 
+const dob = userDetails?.data?.DOB; 
+const dobDate = new Date(dob);
+const formattedDOB = `${dobDate.getDate()}/${dobDate.getMonth() + 1}/${dobDate.getFullYear()}`;
+
+
+
+
+
   return (
-    <div className='flex flex-col  justify-center items-center min-h-screen'>
+    <div className='flex flex-col  justify-center items-center'>
       <div className='print:hidden'>
       {loading ? (
         // loading
@@ -95,10 +103,11 @@ const AadharCard = () => {
         </div>
       )}
       </div>
+      
       {userDetails ? (
-        <div className=' flex space-x-10'>
+        <div className=' flex space-x-2 '>
         {/* Front side of the aadhar */}
-        <div className='flex justify-center items-center'>
+        <div className='flex justify-center items-center border-black border-2 rounded-sm'>
           <div className='bg-white  rounded-lg shadow-md w-[430px] h-[272px]'>
             {/* Header */}
             <div className='flex justify-between items-center p-3  '>
@@ -124,7 +133,7 @@ const AadharCard = () => {
                   <div className='text-[10px]'>
                     <p>{userDetails.data.hinName}</p>
                     <p>{userDetails.data.engName}</p>
-                    <p>जन्म तिथि / DOB : {userDetails.data.DOB}</p>
+                    <p>जन्म तिथि / DOB : {formattedDOB}</p>
                     {console.log('checking the male or not',userDetails.data.gender)}
                     {userDetails.data.gender === 'male' ? <p>पुरुष / {userDetails.data.gender}</p> : <p>महिला / {userDetails.data.gender}</p>  }
                     
@@ -166,7 +175,7 @@ const AadharCard = () => {
 
         {/* Back side of the aadhar */}
         <div className='flex justify-center items-center'>
-          <div className='bg-white  rounded-lg shadow-md w-[430px] h-[272px]'>
+          <div className='bg-white shadow-md w-[430px] h-[275px] border-black border-2 rounded-lg'>
             {/* Header */}
             <div className='flex justify-between items-center p-3  '>
               <img className='h-10 ' src={lion} alt='lion' />
@@ -187,21 +196,33 @@ const AadharCard = () => {
                   Details as on: {formatDate(new Date())}
                 </p>
                 <div className='w-[60%] space-y-3 font-bold'>
+                <p className="whitespace-pre-line">
+                    {userDetails.data.gender === 'male' 
+                    ? `पता: \n आत्मज: ${userDetails.data.hinAddress}`
+                    :`पता: \n आत्मजा: ${userDetails.data.hinAddress}`}
+                 </p>
+
+
+
                   <p>
-                    पता: <br /> आत्मज: {userDetails.data.hinAddress}
+                    
                   </p>
-                  <p>
-                    Address: <br />
-                    S/O: {userDetails.data.address}
-                  </p>
+                  <p className="whitespace-pre-line">
+                    {userDetails.data.gender === 'male' 
+                    ? `Address: \n S/O: ${userDetails.data.address}`
+                    :`Address: \n D/O: ${userDetails.data.address}`}
+                 </p>
                 </div>
                 <img className='h-40 w-40' src={userDetails.data?.QRCode?.secure_url} alt='QR CODE' />
               </div>
 
               {/* Footer */}
-              <div className='text-center mb-2'>
+              <div className='text-center'>
+                <div className='mt-[2px]'>
+
                 <p className='font-bold'>{userDetails.data.aadharNo}</p>
                 <hr className='border-t-2 border-red-600 w-full ' />
+                </div>
 
                 <div className='mt-1 flex  justify-between px-4'>
                   <div className='flex justify-center items-center text-center '>

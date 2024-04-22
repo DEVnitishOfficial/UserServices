@@ -5,7 +5,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": " nodemon app.js",
+    "start": " nodemon index.js",
     "build": "npm install",
     "client": "cd client && npm run dev",
     "dev": "concurrently \"npm run start\" \"npm run client\""
