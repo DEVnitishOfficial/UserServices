@@ -40,10 +40,12 @@ cloudinary.v2.config({
   api_secret : process.env.CLOUDINARY_API_SECRET
 })
 
-app.listen(PORT, async () => {
-    await connectToDB()
+connectToDB.then(() => {
+  app.listen(PORT, async () => {
     console.log(`Server is listening at http://localhost:${PORT}`)
 })
+})
+
 
 app.use("/api/user", userRouter);
 app.use("/api/user/aadhar", aadharRouter);
