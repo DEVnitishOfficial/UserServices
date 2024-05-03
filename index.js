@@ -40,7 +40,7 @@ cloudinary.v2.config({
   api_secret : process.env.CLOUDINARY_API_SECRET
 })
 
-connectToDB.then(() => {
+connectToDB().then(() => {
   app.listen(PORT, async () => {
     console.log(`Server is listening at http://localhost:${PORT}`)
 })
