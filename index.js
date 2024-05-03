@@ -40,11 +40,15 @@ cloudinary.v2.config({
   api_secret : process.env.CLOUDINARY_API_SECRET
 })
 
+// Connect to the database before listening
 connectToDB().then(() => {
-  app.listen(PORT, async () => {
-    console.log(`Server is listening at http://localhost:${PORT}`)
-})
-})
+  app.listen(PORT, () => {
+      console.log(`Server is listening at http://localhost:${PORT}`);
+  });
+}).catch((error) => {
+  console.error("Error connecting to the database:", error);
+});
+
 
 
 app.use("/api/user", userRouter);
